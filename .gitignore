@@ -1,0 +1,13 @@
+## raw + derived data are large (24-33 MB each) and re-creatable by 00_pull / 01_merge
+data/*.csv
+
+.DS_Store
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+## LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz

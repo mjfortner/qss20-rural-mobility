@@ -1,0 +1,118 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{caption}
+\captionsetup{font=small}
+\usepackage[colorlinks=true, citecolor=green, linkcolor=blue, urlcolor=blue]{hyperref}
+
+\title{QSS 20 Final Project Milestone 1}
+\author{Max Fortner (solo)}
+\date{Last updated: \today}
+
+\begin{document}
+\maketitle
+
+\section{Project Option}
+
+\textbf{Senior Thesis / Own Data.} I am continuing the area I committed to in
+\textit{Me Search} and developed in my literature review: why children born into
+similar families end up with different adult outcomes depending on where they grow
+up. My data are the tract-level files from Opportunity Insights' Opportunity Atlas
+(\url{https://opportunityinsights.org/data/}).
+
+\section{Your project's main questions}
+
+My literature review sharpened my original question about the rich--poor achievement
+gap into: \textbf{what distinguishes
+rural Census tracts with above-average upward mobility from otherwise similar rural
+tracts with below-average mobility?} The existing literature is overwhelmingly urban
+(Moving to Opportunity, the neighborhood-exposure papers, and the segregation
+literature all take the metropolitan neighborhood as the unit of interest), and the
+Atlas paper itself notes that ``rurality'' helps in some regions and hurts in others
+without saying why. So, I want to know which neighborhood characteristics separate
+high- from low-mobility rural tracts, and whether those correlates differ from the
+ones that predict mobility in dense urban tracts.
+
+\section{Your project's data sources/relevant fields}
+
+\begin{sloppypar}
+I inner-joined \texttt{tract\_outcomes\_simple.csv} (73{,}278 tracts) and
+\texttt{tract\_covariates.csv} (74{,}044 tracts) on \texttt{state}, \texttt{county},
+and \texttt{tract}, giving 73{,}199 matches and 71{,}958 tracts after dropping those
+missing mobility or density. The unit of analysis is the 2010 Census tract, defined
+by where a child \textit{grew up}; the children are the 1978--1983 birth cohorts,
+with adult outcomes measured around ages 31--37 from tax records. My outcome is
+\texttt{kfr\_pooled\_pooled\_p25}, the mean adult household income \textit{rank} for
+children whose parents sat at the 25th percentile. Candidate explanatory fields
+include \texttt{popdensity2000} (binned into density categories as my rural measure),
+\texttt{singleparent\_share2000}, \texttt{poor\_share2000},
+\texttt{frac\_coll\_plus2000}, \texttt{emp2000}, \texttt{share\_white2000},
+\texttt{gsmn\_math\_g3\_2013}, and \texttt{ann\_avg\_job\_growth\_2004\_2013}. Every
+outcome ships with a standard error and a cell count, which I plan to use to weight
+or screen out tracts resting on very few children.
+\end{sloppypar}
+
+\section{Create one starter visualization}
+
+Among the 17{,}978 rural tracts (under 100 people per square mile), I split at the
+national tract median of mobility (9{,}087 land above it) and compared the two
+groups on ten characteristics, standardized so different scales are comparable.
+Single-parent household share is the biggest separator at $-0.81$ SD, followed by
+poverty at $-0.65$ SD. Job growth, which I expected to matter for rural economies, is
+nearly flat at $+0.09$ SD, consistent with the literature's claim that mobility is a
+childhood-environment story rather than a labor-demand one. Share white is the
+largest positive gap, which I will have to handle carefully rather than report as a
+finding; see Section~\ref{sec:premortem}.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{output/fig2_rural_highvslow_characteristics.png}
+\caption{Standardized difference in neighborhood characteristics between rural tracts
+with above-median and below-median upward mobility. Bars show the difference in group
+means divided by the standard deviation of that characteristic among rural tracts;
+blue bars are higher in high-mobility tracts, orange bars are lower. Differences are
+unadjusted: these are correlations, not effects.}
+\label{fig:rural}
+\end{figure}
+
+\section{Learn from an earlier project on your research topic}
+
+I read the Fall 2022 descriptive-comparison example, ``Exploring the Association
+Between Race and Bail Decisions in Cook County, IL'' (Fink, Jin, Punaini, and Tolat).
+
+\paragraph{Lesson.} They refused to compare pooled averages. Rather than reporting
+one Black--White gap, they compared rates \textit{within} each of the five most
+common offenses, because a pooled gap would mostly reflect which offenses each group
+was charged with. They also named the confounder they could not observe, prior
+criminal history. My figure is currently a pooled comparison of exactly the kind they
+avoided, since high- and low-mobility rural tracts also differ in region and racial
+composition at once. Before writing anything up as a finding I will stratify within
+commuting zone and within bands of racial composition.
+
+\paragraph{Weakness I will improve on.} They report point estimates almost entirely
+without uncertainty: only Table~2 carries $p$-values, while Tables~3--8 give bare
+differences with no standard errors, intervals, or sample sizes. This becomes a real
+problem in their Table~8, where ratios computed on base rates as small as 0.000098
+support a claim that Black defendants are ``as much as 700\% more likely'' to see a
+bond increase. Small rural tracts are exactly where the Atlas standard errors are
+largest, so I will attach intervals to every difference I report, precision-weight or
+impose a minimum-cell-count screen, and show how conclusions shift across screens.
+
+\section{Your project's anticipated challenges}
+\label{sec:premortem}
+
+The most likely way this project fails is that ``rural'' turns out to be a proxy for
+``white and non-poor'' and I write up a race gap as a rurality finding; the figure
+already shows that warning sign, and since high-mobility rural tracts cluster in
+places like the upper Midwest, any comparison risks picking up regional composition
+instead. The fix is within-region comparisons plus reporting mobility separately by
+child race, which the Atlas supports. Measurement is another issue. Density is not a great stand in for rurality, my 100-per-square-mile cutoff is my choice rather than a
+standard, and several covariates are measured after the cohorts I study grew up.
+Third, missingness is not random: the sparsest rural tracts are the most likely to
+be suppressed or noisy, so dropping them quietly changes what ``rural'' means in my
+sample. Fourth, all of this is cross-sectional correlation across places and cannot
+separate a neighborhood effect from families sorting into neighborhoods. I plan to
+scope the project as explicitly descriptive and keep causal language out unless I can
+find a design that supports it.
+
+\end{document}
