@@ -24,8 +24,8 @@ hardcoded to one machine.
 
 | Notebook | Takes in | Does | Outputs |
 |---|---|---|---|
-| [`code/00_pull.ipynb`](code/00_pull.ipynb) | — (downloads from the web) | Downloads the two Opportunity Insights Atlas tables into `data/`, skipping files already present. Prints row counts, duplicate-id checks, and missingness on the key fields. | `data/tract_outcomes_simple.csv`, `data/tract_covariates.csv` |
-| [`code/01_merge.ipynb`](code/01_merge.ipynb) | `data/tract_outcomes_simple.csv`, `data/tract_covariates.csv` | Inner-joins outcomes onto covariates on `(state, county, tract)` with row counts printed before and after, drops tracts with no mobility estimate or no density, bins density into five categories, flags tracts above the national median, and tabulates missingness in every key field. | `data/analysis_sample.csv`, `output/table2_missingness.tex` |
+| [`code/00_pull.ipynb`](code/00_pull.ipynb) | — (downloads from the web) | Downloads the two Opportunity Insights Atlas tables into `data/`, skipping files already present. Prints row counts, duplicate-id checks, and missing-cell counts on the key fields. | `data/tract_outcomes_simple.csv`, `data/tract_covariates.csv` |
+| [`code/01_merge.ipynb`](code/01_merge.ipynb) | `data/tract_outcomes_simple.csv`, `data/tract_covariates.csv` | Inner-joins outcomes onto covariates on `(state, county, tract)` with row counts printed before and after, drops tracts with no mobility estimate or no density, bins density into five categories, flags tracts above the national median, and counts missing cells in every key field. | `data/analysis_sample.csv`, `output/table2_missing_cells.tex` |
 | [`code/02_analyze.ipynb`](code/02_analyze.ipynb) | `data/analysis_sample.csv` | Fits OLS of mobility on standardized neighborhood characteristics among rural tracts, with a logistic model of the above-median indicator as a robustness check, and builds the figures and tables. | `output/fig1_mobility_by_density.png`, `output/fig2_rural_ols_coefficients.png`, `output/table1_analysis_sample.tex`, `output/table3_ols_results.tex` |
 | [`code/utils.py`](code/utils.py) | — | Shared paths, data-source URLs, key variable names, density bins, covariate list, figure palette. | — |
 
@@ -44,9 +44,10 @@ Not committed — see [`data/README.md`](data/README.md) for the download links.
 - **Primary outcome:** `kfr_pooled_pooled_p25` — mean adult household income rank for
   children whose parents were at the 25th percentile
 - **Rural definition:** fewer than 100 people per square mile in 2000
-- **Missingness:** ~1% on most fields, 1.6% on the mobility outcome (Opportunity Insights
-  suppresses tracts with too few children). Quantified per field in
-  `output/table2_missingness.tex`; models are fit on complete cases.
+- **Missing cells:** ~1% of cells on most fields, 1.6% on the mobility outcome
+  (Opportunity Insights suppresses tracts with too few children), at the same rate in
+  rural and non-rural tracts. Counted per field in `output/table2_missing_cells.tex`;
+  models are fit on complete cases.
 
 ## Output
 
@@ -55,7 +56,7 @@ Not committed — see [`data/README.md`](data/README.md) for the download links.
 | [`output/fig1_mobility_by_density.png`](output/fig1_mobility_by_density.png) | Distribution of tract mobility across five population-density categories |
 | [`output/fig2_rural_ols_coefficients.png`](output/fig2_rural_ols_coefficients.png) | OLS coefficients per SD with 95% CIs, rural tracts only |
 | `output/table1_analysis_sample.tex` | Sample characterization |
-| `output/table2_missingness.tex` | Missingness by field, nationally and among rural tracts |
+| `output/table2_missing_cells.tex` | Cells with no value, by field, overall and among rural tracts |
 | `output/table3_ols_results.tex` | Full OLS results |
 
 ## Writeup
