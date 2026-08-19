@@ -32,6 +32,8 @@ COUNT_VAR = "pooled_pooled_count"       # n children behind each tract estimate
 
 ## rural threshold, people per square mile in 2000
 RURAL_CUTOFF = 100
+DENSE_URBAN_CUTOFF = 10000
+MIN_CHILD_COUNT = 200
 
 ## density cut points (people per sq. mile, Census 2000) and their labels
 DENSITY_BINS = [float("-inf"), 100, 500, 2000, 10000, float("inf")]
