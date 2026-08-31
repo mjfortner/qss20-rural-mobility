@@ -13,3 +13,6 @@ __pycache__/
 *.log
 *.out
 *.synctex.gz
+
+## editing convenience, not a deliverable (see ../tex_to_docx.py)
+writeup/*.docx
