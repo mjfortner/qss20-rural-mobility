@@ -56,9 +56,8 @@ share of single-parent households is the largest adjusted correlate of adult
 income rank for children raised at the 25th percentile: a one-standard-deviation
 increase (8.4 percentage points) corresponds to a 1.51 percentile-point lower
 mean adult income rank (95\% CI $-1.69$ to $-1.34$), about a quarter of a
-standard deviation of rural tract mobility. Local economic conditions --- job
-growth, employment, commute time, and mean household income --- are
-statistically indistinguishable from zero once region is held fixed. Ten tract
+standard deviation of rural tract mobility. Local economic conditions are
+statistically indistinguishable from zero once a region is held fixed. Ten tract
 characteristics add only 0.097 to $R^2$ beyond commuting-zone indicators
 alone, which explain 0.564 on their own: most of what predicts rural mobility
 is which labor market a tract sits in, not the tract itself. These are
@@ -84,11 +83,12 @@ observes that rurality is associated with higher mobility in some regions and
 lower mobility in others without identifying what separates the
 two~\cite{chetty2018atlas}. Roughly one in four tracts in the merged Atlas
 sample has fewer than 100 people per square mile, and place-based opportunity
-policy is usually designed around urban mechanisms --- housing vouchers, school
-choice, transit access --- that may not describe what varies across rural
-places.
+policy is usually designed around urban mechanisms that may not describe what
+varies across rural places. Growing up in a rural area, I wanted to dive deeper
+into how mobility works there, and challenge some of my pre-conceived notions
+on the topic.
 
-This paper asks a deliberately descriptive question: \textbf{among rural Census
+This paper asks: \textbf{among rural Census
 tracts inside the same local labor market, which neighborhood characteristics
 distinguish those with above-average upward mobility from those with
 below-average upward mobility, and do those correlates differ from the ones
@@ -96,21 +96,17 @@ that operate in dense urban tracts?} I answer it with tract-level Opportunity
 Atlas data, comparing rural tracts only against other tracts in the same
 commuting zone, and I report every estimate with a cluster-robust interval.
 
-Family structure dominates. Among rural tracts in the same commuting zone,
-single-parent household share carries the largest adjusted association with
-children's adult income rank --- larger than mean household income, poverty,
-employment, job growth, commute time, or third-grade math scores --- while the
-local economic indicators are indistinguishable from zero. This extends the
+Among rural tracts in the same commuting zone, single-parent household share
+carries the largest adjusted association with children's adult income rank.
+This is larger than mean household income, poverty, employment, job growth,
+commute time, or third-grade math scores. Meanwhile, the local economic
+indicators are indistinguishable from zero. This extends the
 national pattern in~\cite{chetty2014land}, where family structure was the
 strongest of five candidate correlates across commuting zones, by showing that
 the same ordering survives \emph{within} rural areas of a single labor market,
 where composition-based explanations for it are weakest. The rural pattern is
 also not a rescaled copy of the urban one: poverty share flips sign between
 rural and dense-urban tracts on a common scale.
-
-\towrite{2--4 sentences of your own motivation, at the end of this section or
-folded into the first paragraph. See the notes file: you already wrote a
-version of this in the Me Search assignment and Milestone 1.}
 
 %% ====================================================================
 \section{Related work}
@@ -161,8 +157,8 @@ downloaded in \texttt{code/00\_pull.ipynb}: table 4
 (\texttt{tract\_outcomes\_simple.csv}, 73{,}278 tracts, read with the seven
 columns used here) and table 9 (\texttt{tract\_covariates.csv}, 74{,}044
 tracts, 36 columns after dropping the commuting-zone fields duplicated across
-the two files). No API key is required and the raw files are not committed; the
-pull notebook reproduces them. Outcomes describe the 1978--1983 birth cohorts measured in
+the two files). The raw files are not committed; the pull notebook reproduces
+them. Outcomes describe the 1978--1983 birth cohorts measured in
 adulthood (roughly ages 31--37, around 2014--2015) from federal income tax
 records. Covariates are measured in 2000 except third-grade math scores (2013)
 and Census mail return rate (2010).
@@ -194,8 +190,7 @@ and figure uses the same names and labels.
 people per square mile in 2000 (\texttt{popdensity2000}): a transparent
 project-specific cutoff, not the Census Bureau's official classification, which
 is built from block-level population and land-use criteria. Density is an
-imperfect proxy --- a low-density tract on the edge of a metropolitan area is
-economically suburban --- though the commuting-zone fixed effects in
+imperfect proxy, though the commuting-zone fixed effects in
 Section~\ref{sec:methods} absorb part of this, since such a tract is compared
 against other tracts in the same metropolitan labor market.
 Table~\ref{tab:sample} characterizes the merged sample: 71{,}958 tracts across
@@ -215,8 +210,7 @@ tract's estimate.}
 
 \paragraph{Missing cells.} Table~\ref{tab:missing} reports, per field, the
 tracts with no value, overall and among rural tracts. The outcome is missing
-for 1.6\% of tracts --- Opportunity Insights suppresses estimates resting on
-too few children --- and at the same 1.6\% rate among rural tracts. Job growth
+for 1.6\% of tracts and at the same 1.6\% rate among rural tracts. Job growth
 has the highest overall rate (3.5\%) but is \emph{less} often missing in rural
 tracts (1.1\%); only the Census mail return rate is appreciably worse in rural
 tracts (2.5\% versus 0.9\%). I expected suppression to fall disproportionately
@@ -236,7 +230,7 @@ non-rural tracts.}
 
 \paragraph{Limitations of the source.} (i) The Atlas reports estimates, not
 populations: each tract value carries sampling error, largest where few
-children grew up, which is disproportionately rural --- addressed below with a
+children grew up, which is disproportionately rural, addressed below with a
 minimum-count screen. (ii) Covariates are cross-sectional and two are measured
 after the focal cohorts' childhood years, so they describe the tract as it
 later was. (iii) Tracts use 2010 boundaries but the children grew up in the
@@ -314,11 +308,11 @@ Table~\ref{tab:ols}: same estimate, different scale. The rural-only scale is
 quoted for the headline result.
 
 \paragraph{What this design does not identify.} This is descriptive, not
-causal. There is no exogenous variation in tract characteristics and no source
-of causal identification: commuting-zone fixed effects remove between-region
-composition, but not the sorting of families into tracts within a region, and
-not unobserved tract differences. Coefficients are conditional associations,
-and I use ``associated with'' throughout deliberately.
+causal: there is no exogenous variation in tract characteristics.
+Commuting-zone fixed effects remove between-region composition, but not the
+sorting of families into tracts within a region, and not unobserved tract
+differences. Coefficients are conditional associations, and I use ``associated
+with'' deliberately.
 
 %% ====================================================================
 \section{Results}
@@ -334,7 +328,7 @@ outcome; the variation worth explaining is \emph{among} rural places.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.72\linewidth]{fig1_mobility_by_density.png}
+\includegraphics[width=0.66\linewidth]{fig1_mobility_by_density.png}
 \caption{\textbf{Within-category mobility variation exceeds median
 differences.} Distribution of mean adult household income rank for children of
 25th-percentile parents, by 2000 population density category, across 71{,}958
@@ -351,9 +345,9 @@ household share carries by far the largest association: a one standard
 deviation increase (8.4 percentage points) corresponds to a
 \textbf{1.51 percentile-point lower} mean adult income rank (95\% CI $-1.69$ to
 $-1.34$, $p<0.001$). Rural tract mobility has a standard deviation of 6.3
-percentile points, so this is roughly a quarter of a standard deviation --- the
-largest single association in the model, and about a third larger in magnitude
-than the next-largest coefficient.
+percentile points, so this is roughly a quarter of a standard deviation, which
+is the largest single association in the model, and about a third larger in
+magnitude than the next-largest coefficient.
 
 Share white is the second largest (+1.15 points per SD) and BA share the third
 (+0.74). The four local economic indicators are the striking null result:
@@ -367,7 +361,7 @@ rather than a labor-market one~\cite{chetty2015mto}.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.78\linewidth]{fig2_rural_ols_coefficients.png}
+\includegraphics[width=0.73\linewidth]{fig2_rural_ols_coefficients.png}
 \caption{\textbf{Single-parent share has the largest adjusted rural
 association.} OLS coefficients from Equation~\ref{eq:ols} on 17{,}310 rural
 tracts, expressed per standard deviation of each characteristic among rural
@@ -397,7 +391,7 @@ rural tract mobility; adding all ten characteristics raises this to 0.661, an
 incremental $R^2$ of \textbf{0.097}. These ten characteristics therefore
 explain about a tenth of rural mobility variation once region is accounted for.
 Most of what predicts a rural child's adult income rank is which regional labor
-market they grew up in, not which tract inside it --- and reporting the
+market they grew up in, not which tract inside it, and reporting the
 full-model 0.661 as the covariates' explanatory power would overstate it
 roughly sevenfold.
 
@@ -405,10 +399,10 @@ roughly sevenfold.
 compares the main coefficients with those from the 14{,}741 rural tracts whose
 estimates rest on at least 200 children. Single-parent share is essentially
 unchanged and slightly larger ($-0.0151$ to $-0.0157$), as are share white and
-third-grade math. Three coefficients change sign --- job growth, commute time,
-employment share --- but all three are null in the main model, so these are
-movements of noise around zero, not unstable associations; the table marks
-significance so this is visible without the surrounding text.
+third-grade math. Three coefficients change sign: job growth, commute time,
+employment share. All three are null in the main model, so these are movements
+of noise around zero, not unstable associations; the table marks significance
+so this is visible without the surrounding text.
 
 \begin{table}[htbp]
 \centering
@@ -437,12 +431,11 @@ sign here is best understood as suppression among correlated regressors. The
 comparison is \textbf{exploratory}: the dense-urban model has only 28
 commuting-zone clusters, below the range where cluster-robust standard errors
 are reliable~\cite{cameron2015practitioner}, so its intervals are likely too
-narrow. It is reported to compare the \emph{shape} of the two patterns, not to
-support inference about dense-urban magnitudes.
+narrow. It compares shape, not magnitude.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.78\linewidth]{fig3_rural_dense_coefficients.png}
+\includegraphics[width=0.73\linewidth]{fig3_rural_dense_coefficients.png}
 \caption{\textbf{Same-scale rural and dense-urban associations.} Coefficients
 from Equation~\ref{eq:ols} fit separately on rural ($<$100 people per square
 mile, $N=17{,}310$, 727 clusters) and dense-urban ($\geq$10{,}000,
@@ -476,13 +469,14 @@ effects: the design cannot separate a neighborhood effect from families sorting
 into neighborhoods, and single-parent share may proxy for family resources that
 travel with children regardless of place. The predictors are strongly collinear
 (mean income with BA share, $r=0.78$), so coefficients trade off against one
-another and the poverty coefficient in particular is a suppression artifact.
-``Rural'' is a density cutoff of my own choosing rather than the Census
-Bureau's definition. And the dense-urban comparison rests on 28 clusters and is
-exploratory.
+another and the poverty coefficient is a suppression artifact. ``Rural'' is a
+density cutoff of my own choosing, not the Census Bureau's. And the dense-urban
+comparison rests on 28 clusters.
 
-\towrite{your own closing: what you would do next, and what you would want a
-reader to take away. See the notes file for concrete candidates.}
+The most important finding of this project was the correlation between
+single-parent households and mobility, and I think future work on rural
+mobility could be targeted towards finding the causes of this correlation, and
+other traits associated with share of single-parent households.
 
 %% ====================================================================
 \begin{thebibliography}{99}
@@ -595,7 +589,9 @@ was confidently wrong.}
 
 \subsection*{Transcripts}
 
-\towrite{paste the transcripts, or link them. Check whether the assignment
-wants them inline or as a link.}
+\begin{itemize}\itemsep2pt
+\item Claude: \href{https://docs.google.com/document/d/16tEyKmXsj5zVQupSGv-JQbtHahILT8lN/edit?usp=sharing}{\texttt{agentic\_transcript\_fortner.docx}}
+\item ChatGPT: \href{https://docs.google.com/document/d/1VHYOB-BYbF-cUh4MJhan6rHSXbE5qv2O/edit?usp=sharing}{\texttt{qss20\_chat\_transcript.docx}}
+\end{itemize}
 
 \end{document}
