@@ -85,6 +85,10 @@ Not committed — see [`data/README.md`](data/README.md) for the download links.
 
 ## Writeup
 
+[`writeup/final_paper.tex`](writeup/final_paper.tex) — final paper. It reads the
+generated figures and tables directly out of `output/`, so the numbers in the paper and
+the numbers in the repo cannot drift apart.
+
 [`writeup/milestone1_fortner.pdf`](writeup/milestone1_fortner.pdf) — Milestone 1 memo
 (source: [`writeup/milestone1_fortner.tex`](writeup/milestone1_fortner.tex)).
 
