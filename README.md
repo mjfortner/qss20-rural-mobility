@@ -2,6 +2,9 @@
 
 **QSS 20 final project — Max Fortner (solo).** Project option: Senior Thesis / Own Data.
 
+**Project website:** <https://mjfortner.com/qss20> — the question, data, method, result,
+and takeaway in a couple of minutes, with the figures below embedded.
+
 **Research question:** what distinguishes rural Census tracts with above-average upward
 mobility from otherwise similar rural tracts with below-average mobility?
 
@@ -19,6 +22,13 @@ household-income rank (`95% CI: -1.69 to -1.34` points). The estimate is similar
 the 200-child screen (-1.6 points). Rural and dense-urban coefficients are also shown on
 a common pooled-SD scale, but the dense-urban comparison is exploratory because it
 contains only 28 commuting-zone clusters.
+
+Two scales appear in the outputs and are not interchangeable. `fig2` and `table3` are
+standardized within the rural sample, and that is the scale the headline number above
+is quoted on (single-parent share = -0.015 income-rank points per rural SD). `fig3`
+restandardizes both groups on pooled rural + dense-urban SDs so the two sets of
+coefficients are comparable, which moves the same rural coefficient to -0.021. The
+axis label on each figure names its scale; compare `fig3` for shape, not magnitude.
 
 ![Within-category mobility variation exceeds median differences](output/fig1_mobility_by_density.png)
 
@@ -71,12 +81,18 @@ Not committed — see [`data/README.md`](data/README.md) for the download links.
 | `output/table1_analysis_sample.tex` | Sample characterization |
 | `output/table2_missing_cells.tex` | Cells with no value, by field, overall and among rural tracts |
 | `output/table3_ols_results.tex` | Main within-commuting-zone rural OLS results |
-| `output/table4_count_sensitivity.tex` | Main coefficients compared with the 200-child minimum sample |
+| `output/table4_count_sensitivity.tex` | Main coefficients compared with the 200-child minimum sample; `*` marks p$<$0.05 and a table note names the coefficients that change sign while being null in the main model |
 
 ## Writeup
 
 [`writeup/milestone1_fortner.pdf`](writeup/milestone1_fortner.pdf) — Milestone 1 memo
 (source: [`writeup/milestone1_fortner.tex`](writeup/milestone1_fortner.tex)).
+
+The memo is kept as submitted. One anticipated challenge in it did not survive the
+analysis: it predicted that missingness would be non-random against the sparsest rural
+tracts. `output/table2_missing_cells.tex` shows suppression on the outcome running at
+about the same rate in rural and non-rural tracts, so that concern is not supported and
+is not carried into the final writeup.
 
 ## Caveats
 
