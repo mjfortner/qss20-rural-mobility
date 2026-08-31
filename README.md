@@ -85,9 +85,13 @@ Not committed — see [`data/README.md`](data/README.md) for the download links.
 
 ## Writeup
 
-[`writeup/final_paper.tex`](writeup/final_paper.tex) — final paper. It reads the
-generated figures and tables directly out of `output/`, so the numbers in the paper and
-the numbers in the repo cannot drift apart.
+[`writeup/final_paper.pdf`](writeup/final_paper.pdf) — final paper, six pages plus
+references and the AI-use appendix. Source is
+[`writeup/final_paper.tex`](writeup/final_paper.tex), written against the PNAS
+single-column mathematics class; the class and its support files sit beside it, so
+`pdflatex final_paper.tex` works from a fresh clone. The paper reads its figures and
+tables straight out of `output/`, so the numbers in it cannot drift from the ones the
+notebooks produce.
 
 [`writeup/milestone1_fortner.pdf`](writeup/milestone1_fortner.pdf) — Milestone 1 memo
 (source: [`writeup/milestone1_fortner.tex`](writeup/milestone1_fortner.tex)).

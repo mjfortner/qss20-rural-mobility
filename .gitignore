@@ -16,3 +16,9 @@ __pycache__/
 
 ## editing convenience, not a deliverable (see ../tex_to_docx.py)
 writeup/*.docx
+
+## LaTeX build leftovers from the PNAS class
+writeup/*.bbl
+writeup/*.blg
+writeup/*.fdb_latexmk
+writeup/*.fls

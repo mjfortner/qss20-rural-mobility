@@ -1,48 +1,58 @@
 %% ===================================================================
-%% QSS 20 final paper -- draft
+%% QSS 20 final paper. PNAS single-column mathematics template.
 %%
-%% PORTING TO THE PNAS TEMPLATE (do this before submitting):
-%%   1. Open the PNAS Overleaf gallery, take the *single-column
-%%      mathematics article* template (2nd from left), "Open as Template".
-%%   2. In pnas-new.cls set the DRAFT watermark to false.
-%%   3. Upload output/fig1-3.png and output/table1-4.tex into the
-%%      Overleaf project, then set \OUT below to {.} (see next line).
-%%   4. Paste everything between \begin{document} and \end{document}
-%%      into the template body. Section names map one-to-one.
+%% Build: pdflatex final_paper.tex (twice, for cross-references).
+%% The PNAS class and its support files sit beside this file, so the paper
+%% compiles from a fresh clone; figures and tables are read from ../output/,
+%% which the notebooks generate.
 %%
-%% This preamble only exists so the draft compiles locally; the PNAS
-%% class replaces it entirely.
+%% On Overleaf: upload the output/ figures and tables and set \OUT to {.}
+%% The DRAFT watermark is already off (pnas-new.cls, displaywatermark=false).
 %% ===================================================================
-\documentclass[9pt]{extarticle}
-\usepackage[letterpaper,margin=0.9in]{geometry}
-\linespread{1.02}
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{amsmath}
-\usepackage{caption}
-\usepackage{xcolor}
-\usepackage[colorlinks=true,allcolors=blue]{hyperref}
-\captionsetup{font=small,labelfont=bf}
-\setlength{\parskip}{0pt}
-\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
-\setlength{\intextsep}{10pt plus 2pt minus 2pt}
-\setlength{\abovecaptionskip}{5pt}
+\documentclass[9pt,twoside]{pnas-new}
+\articletype{Research Article}
+\templatetype{pnasmathematics}
 
-%% path to the generated figures and tables; set to {.} on Overleaf
+\usepackage{booktabs}
+\usepackage[section]{placeins}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.9}
+\setcounter{topnumber}{3}
+\setcounter{totalnumber}{4}
+
+%% Generated figures and tables live in output/. On Overleaf, upload them and
+%% set \OUT to {.}
 \newcommand{\OUT}{../output}
 \graphicspath{{../output/}{./}}
 
-
-\title{\vspace{-2em}Which Rural Places Move Kids Up?\\
-\large Neighborhood Correlates of Upward Mobility Within Rural Labor Markets}
-\author{Maxwell Fortner\\\small Dartmouth College, QSS 20}
-\date{\small\today}
-
 \begin{document}
-\maketitle
+
+\title{Which Rural Places Move Kids Up? Neighborhood Correlates of Upward
+Mobility Within Rural Labor Markets}
+
+\author[a]{Maxwell Fortner}
+\affil[a]{Department of Quantitative Social Science, Dartmouth College, Hanover, NH 03755}
+
+\leadauthor{Fortner}
+
+\significancestatement{Research on how neighborhoods shape children's adult
+earnings is built almost entirely on cities, and the Opportunity Atlas notes
+that growing up rural helps children in some regions and hurts them in others
+without saying what separates the two. Comparing rural Census tracts against
+other tracts in the same local labor market, the share of single-parent
+households is the largest measured correlate of adult income rank for children
+raised poor, while local economic conditions show no measurable association.
+The effect of region, however, dwarfs that of any tract characteristic.}
+
+\authorcontributions{M.F. designed the analysis, wrote the code, and wrote the paper.}
+\authordeclaration{The author declares no competing interests.}
+
+\keywords{intergenerational mobility $|$ rural America $|$ neighborhood effects $|$ Opportunity Atlas}
 
 \begin{abstract}
-\noindent Research on neighborhoods and intergenerational mobility is
+Research on neighborhoods and intergenerational mobility is
 overwhelmingly urban, and the Opportunity Atlas notes that rurality helps
 children in some regions and hurts them in others without saying what separates
 the two. I ask which neighborhood characteristics distinguish rural Census
@@ -61,7 +71,14 @@ is which labor market a tract sits in, not the tract itself. These are
 descriptive conditional associations, not causal estimates.
 \end{abstract}
 
-%% ====================================================================
+\dates{QSS 20 final project. Compiled on \today}
+
+\maketitle
+\thispagestyle{firststyle}
+\ifthenelse{\boolean{shortarticle}}{\ifthenelse{\boolean{singlecolumn}}{\abscontentformatted}{\abscontent}}{}
+
+\Firstpage
+
 \section{Introduction}
 %% ====================================================================
 
@@ -109,7 +126,7 @@ rural and dense-urban tracts on a common scale.
 \section{Related work}
 %% ====================================================================
 
-\paragraph{Neighborhood effects on mobility.} Chetty and Hendren estimate that
+\noindent\textbf{Neighborhood effects on mobility.} Chetty and Hendren estimate that
 neighborhoods affect children's adult outcomes through cumulative childhood
 exposure, using families who move between areas at different child
 ages~\cite{chetty2017exposure,chetty2018county}, and the Moving to Opportunity
@@ -118,7 +135,7 @@ This work identifies \emph{that} place matters and how much; it says less about
 \emph{which} features of a place track opportunity, and is estimated almost
 entirely on urban movers.
 
-\paragraph{Correlates of mobility across places.} A parallel descriptive
+\noindent\textbf{Correlates of mobility across places.} A parallel descriptive
 literature asks what distinguishes high- from low-mobility places. Across
 commuting zones, mobility correlates with residential segregation, income
 inequality, school quality, social capital, and family structure, the last
@@ -135,7 +152,7 @@ I ask
 instead what separates rural tracts from \emph{each other} inside the same
 labor market.
 
-\paragraph{Mechanisms: schools, sorting, and race.} Two of my predictors are
+\noindent\textbf{Mechanisms: schools, sorting, and race.} Two of my predictors are
 already contested in this literature. Third-grade math scores stand in for
 school quality, which tracks measured achievement
 gaps~\cite{reardon2011,hanushek2006} but is itself something families sort
@@ -149,7 +166,7 @@ design.
 \section{Data}
 %% ====================================================================
 
-\paragraph{Source and time window.} All data come from the Opportunity
+\noindent\textbf{Source and time window.} All data come from the Opportunity
 Insights Opportunity Atlas public tract files~\cite{chetty2018atlas},
 downloaded in \texttt{code/00\_pull.ipynb}: table 4
 (\texttt{tract\_outcomes\_simple.csv}, 73{,}278 tracts, read with the seven
@@ -161,21 +178,21 @@ adulthood (roughly ages 31--37, around 2014--2015) from federal income tax
 records. Covariates are measured in 2000 except third-grade math scores (2013)
 and Census mail return rate (2010).
 
-\paragraph{Unit of analysis.} In the original source each row is a 2010 Census
+\noindent\textbf{Unit of analysis.} In the original source each row is a 2010 Census
 tract, and each outcome is an estimate for the children who \emph{grew up}
 there, aggregated across all children of parents at a given income percentile;
 the Atlas releases no individual records. My unit of analysis is the same. No
 repeated measurement arises: each tract appears once, and the outcome is a
 single cohort-pooled statistic, not a panel.
 
-\paragraph{Outcome.} \texttt{kfr\_pooled\_pooled\_p25}: the mean percentile
+\noindent\textbf{Outcome.} \texttt{kfr\_pooled\_pooled\_p25}: the mean percentile
 rank in the national adult household income distribution for children whose
 parents sat at the 25th percentile, pooling across child race and gender: 0.43
 means those children reached the 43rd percentile on average. Because the
 outcome is a rank, coefficients read as percentile points once multiplied by
 100.
 
-\paragraph{Predictors.} Ten tract characteristics, fixed before estimation to
+\noindent\textbf{Predictors.} Ten tract characteristics, fixed before estimation to
 span family structure, economic conditions, human capital, social
 connectedness, and racial composition: share of single-parent households, share
 below the poverty line, mean household income, share of adults employed, annual
@@ -184,7 +201,7 @@ mean third-grade math score, Census mail return rate, and share white. All are
 defined once in \texttt{code/utils.py} (\texttt{COVARIATES}), so every notebook
 and figure uses the same names and labels.
 
-\paragraph{Rural definition and analysis sample.} Rural means fewer than 100
+\noindent\textbf{Rural definition and analysis sample.} Rural means fewer than 100
 people per square mile in 2000 (\texttt{popdensity2000}): a transparent
 project-specific cutoff, not the Census Bureau's official classification, which
 is built from block-level population and land-use criteria. Density is an
@@ -195,8 +212,8 @@ Table~\ref{tab:sample} characterizes the merged sample: 71{,}958 tracts across
 741 commuting zones, 17{,}978 of them rural, with median tract mobility 0.425
 (SD 0.071) and a median of 380 children behind each estimate.
 
-\begin{table}[htbp]
-\centering\small
+\begin{table}[!htbp]
+\centering\footnotesize
 \caption{\textbf{Analysis sample.} Merged Opportunity Atlas tracts after the
 one-to-one join and the drop of tracts missing mobility or population density.
 Mobility is the mean adult household income rank of children whose parents were
@@ -206,8 +223,9 @@ tract's estimate.}
 \input{\OUT/table1_analysis_sample.tex}
 \end{table}
 
-\paragraph{Missing cells.} Table~\ref{tab:missing} reports, per field, the
-tracts with no value, overall and among rural tracts. The outcome is missing
+\noindent\textbf{Missing cells.} Counts of tracts with no value, per field, are in
+\texttt{output/table2\_missing\_cells.tex} in the repository.
+The outcome is missing
 for 1.6\% of tracts and at the same 1.6\% rate among rural tracts. Job growth
 has the highest overall rate (3.5\%) but is \emph{less} often missing in rural
 tracts (1.1\%); only the Census mail return rate is appreciably worse in rural
@@ -215,25 +233,13 @@ tracts (2.5\% versus 0.9\%). I expected suppression to fall disproportionately
 on sparse rural tracts, which would have made the rural sample a biased subset
 of rural America. It does not.
 
-\begin{table}[htbp]
-\centering
-\caption{\textbf{Cells with no value, by field.} Counts and percentages over
-the 71{,}958-tract analysis sample, with the rural-only rate in the last
-column. Suppression of the mobility outcome runs at the same rate in rural and
-non-rural tracts.}
-\label{tab:missing}
-\footnotesize
-\input{\OUT/table2_missing_cells.tex}
-\end{table}
-
-\paragraph{Limitations of the source.} (i) The Atlas reports estimates, not
+\noindent\textbf{Limitations of the source.} (i) The Atlas reports estimates, not
 populations: each tract value carries sampling error, largest where few
 children grew up, which is disproportionately rural, addressed below with a
 minimum-count screen. (ii) Covariates are cross-sectional and two are measured
-after the focal cohorts' childhood years, so they describe the tract as it
-later was. (iii) Tracts use 2010 boundaries but the children grew up in the
-1980s and 1990s. (iv) Complete-case estimation drops 668 of 17{,}978 rural
-tracts (3.7\%), a loss the fitting function prints at run time.
+after the focal cohorts' childhood years. (iii) Tracts use 2010 boundaries but
+the children grew up in the 1980s and 1990s. (iv) Complete-case estimation
+drops 668 of 17{,}978 rural tracts (3.7\%).
 
 %% ====================================================================
 \section{Methods}
@@ -243,27 +249,25 @@ tracts (3.7\%), a loss the fitting function prints at run time.
 Analysis runs in three numbered notebooks that execute in order and define
 their functions at the top: \texttt{00\_pull.ipynb} downloads,
 \texttt{01\_merge.ipynb} merges and cleans, \texttt{02\_analyze.ipynb}
-estimates and writes every figure and table in this paper. All paths resolve
-relative to \texttt{code/utils.py}, so nothing is hardcoded to one machine.
+estimates and writes every figure and table here. All paths resolve relative to
+\texttt{code/utils.py}.
 
-\paragraph{Cleaning and merging.} The two Atlas tables are joined on the tract
+\noindent\textbf{Cleaning and merging.} The two Atlas tables are joined on the tract
 key \texttt{(state, county, tract)} with an \textbf{inner join}, validated as
 \textbf{one-to-one} (\texttt{pandas.merge(..., how="inner",
-validate="one\_to\_one")}), so a silent many-to-many blowup would raise rather
-than inflate the sample. Row counts are printed before and after: 73{,}278
-outcome rows and 74{,}044 covariate rows in, 73{,}199 matched rows out, losing
-79 outcome rows and 845 covariate rows that have no counterpart in the other
-file. I then drop 1{,}241 tracts missing either the mobility outcome or
-population density, leaving \textbf{71{,}958} tracts. This is an exact-match
-merge on a shared numeric key; no fuzzy matching is involved, and no blocking
-is required.
+validate="one\_to\_one")}), so a silent many-to-many blowup would raise rather than inflate the sample. Row counts are printed
+before and after: 73{,}278 outcome rows and 74{,}044 covariate rows in,
+73{,}199 matched rows out. I then drop 1{,}241 tracts missing either the
+mobility outcome or population density, leaving \textbf{71{,}958} tracts. This
+is an exact-match merge on a shared numeric key; no fuzzy matching or blocking
+is involved.
 
-\paragraph{Derived variables.} The density cutoffs are defined once in
+\noindent\textbf{Derived variables.} The density cutoffs are defined once in
 \texttt{code/utils.py}: rural below 100 and dense urban at or above 10{,}000
 people per square mile. The child count (\texttt{pooled\_pooled\_count}) is
 carried through the merge for the screen.
 
-\paragraph{Estimation.} For the rural sample I estimate
+\noindent\textbf{Estimation.} For the rural sample I estimate
 \begin{equation}
 y_{ic} = \alpha_c + \sum_{k=1}^{10} \beta_k z_{ic}^{(k)} + \varepsilon_{ic},
 \label{eq:ols}
@@ -280,18 +284,18 @@ Midwest?'' Standardizing puts shares, dollars, minutes, and test-score points
 on one axis; the cost is that a coefficient means nothing without the standard
 deviation it is scaled by, which Section~\ref{sec:results} states explicitly.
 
-\paragraph{Explained variance.} I report the \emph{incremental} $R^2$: the
+\noindent\textbf{Explained variance.} I report the \emph{incremental} $R^2$: the
 $R^2$ of Equation~\ref{eq:ols} minus that of a commuting-zone-indicators-only
 model. The full-model $R^2$ does not measure what the tract characteristics
 explain, because the fixed effects already absorb most of the variance.
 
-\paragraph{Precision screen.} Atlas estimates resting on few children are
+\noindent\textbf{Precision screen.} Atlas estimates resting on few children are
 noisy, so I refit Equation~\ref{eq:ols} on the 15{,}186 rural tracts (84.5\%)
 whose estimates rest on at least 200 children. This is a sensitivity check
 rather than the preferred specification, since dropping the sparsest tracts
 changes which rural places the sample describes.
 
-\paragraph{Rural versus dense-urban comparison.} To ask whether the rural
+\noindent\textbf{Rural versus dense-urban comparison.} To ask whether the rural
 pattern is distinctive I fit Equation~\ref{eq:ols} separately on rural and on
 dense-urban tracts ($\geq$10{,}000 people per square mile). Coefficients from
 two separately standardized models are not comparable, because one standard
@@ -304,7 +308,7 @@ in Figure~\ref{fig:compare} but $-0.015$ in Figure~\ref{fig:rural} and
 Table~\ref{tab:ols}: same estimate, different scale. The rural-only scale is
 quoted for the headline result.
 
-\paragraph{What this design does not identify.} This is descriptive, not
+\noindent\textbf{What this design does not identify.} This is descriptive, not
 causal: there is no exogenous variation in tract characteristics.
 Commuting-zone fixed effects remove between-region composition, but not the
 sorting of families into tracts within a region, and not unobserved tract
@@ -323,7 +327,7 @@ Rurality alone is not a useful predictor of a child's outcome, so the
 analysis below compares rural tracts with each other rather than with urban
 ones.
 
-\paragraph{Family structure is the largest adjusted correlate in rural tracts.}
+\noindent\textbf{Family structure is the largest adjusted correlate in rural tracts.}
 Figure~\ref{fig:rural} and Table~\ref{tab:ols} report Equation~\ref{eq:ols}
 estimated on 17{,}310 rural tracts across 727 commuting zones. Single-parent
 household share carries by far the largest association: a one standard
@@ -344,9 +348,9 @@ with the adult incomes of the children raised there, consistent with the
 exposure literature's framing of mobility as a childhood-environment process
 rather than a labor-market one~\cite{chetty2015mto}.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.73\linewidth]{fig2_rural_ols_coefficients.png}
+\includegraphics[width=0.80\linewidth]{fig2_rural_ols_coefficients.png}
 \caption{\textbf{Single-parent share has the largest adjusted rural
 association.} OLS coefficients from Equation~\ref{eq:ols} on 17{,}310 rural
 tracts, expressed per standard deviation of each characteristic among rural
@@ -357,8 +361,8 @@ zero.}
 \label{fig:rural}
 \end{figure}
 
-\begin{table}[htbp]
-\centering\small
+\begin{table}[!htbp]
+\centering\footnotesize
 \caption{\textbf{Within-commuting-zone OLS results, rural tracts.}
 Coefficients are changes in mean adult household income rank per standard
 deviation of each characteristic among rural tracts; multiply by 100 for
@@ -370,37 +374,24 @@ incremental $R^2$ in the text.}
 \input{\OUT/table3_ols_results.tex}
 \end{table}
 
-\paragraph{Region explains far more than tract characteristics do.}
+\noindent\textbf{Region explains far more than tract characteristics do.}
 Commuting-zone indicators alone account for $R^2=0.564$ of the variation in
 rural tract mobility; adding all ten characteristics raises this to 0.661, an
 incremental $R^2$ of \textbf{0.097}. These ten characteristics therefore
 explain about a tenth of rural mobility variation once region is accounted for.
-Most of what predicts a rural child's adult income rank is which regional labor
-market they grew up in, not which tract inside it, and reporting the
-full-model 0.661 as the covariates' explanatory power would overstate it
-roughly sevenfold.
+Most of what predicts a rural child's adult income
+rank is which regional labor market they grew up in, not which tract inside it.
 
-\paragraph{The result survives a precision screen.} Table~\ref{tab:screen}
-compares the main coefficients with those from the 14{,}741 rural tracts whose
-estimates rest on at least 200 children. Single-parent share is essentially
+\noindent\textbf{The result survives a precision screen.} Refitting on the 14{,}741 rural tracts whose estimates rest on at least 200
+children (\texttt{output/table4\_count\_sensitivity.tex}) leaves the ranking
+intact. Single-parent share is essentially
 unchanged and slightly larger ($-0.0151$ to $-0.0157$), as are share white and
 third-grade math. Three coefficients change sign: job growth, commute time,
 employment share. All three are null in the main model, so these are movements
-of noise around zero, not unstable associations; the table marks significance
-so this is visible without the surrounding text.
+of noise around zero, not unstable associations; that table marks significance so this is
+visible without the surrounding text.
 
-\begin{table}[htbp]
-\centering
-\caption{\textbf{Sensitivity to a minimum child-count screen.} Main
-coefficients (all complete cases, $N=17{,}310$) beside the same model fit only
-on tracts whose Atlas estimate rests on at least 200 children
-($N=14{,}741$).}
-\label{tab:screen}
-\footnotesize
-\input{\OUT/table4_count_sensitivity.tex}
-\end{table}
-
-\paragraph{The rural pattern is not a scaled-down urban one.}
+\noindent\textbf{The rural pattern is not a scaled-down urban one.}
 Figure~\ref{fig:compare} places both groups on a common pooled
 standard-deviation scale. Single-parent share leads in both settings but is
 markedly \emph{stronger} in dense-urban tracts ($-0.031$ versus $-0.021$ per
@@ -408,19 +399,17 @@ pooled SD), and share below the poverty line \emph{reverses sign}: positive in
 rural tracts ($+0.005$), negative in dense-urban ones ($-0.012$). Mean
 household income does the same, near zero in rural tracts and strongly negative
 in dense-urban ones ($-0.016$). The positive rural poverty coefficient should
-not be read as poverty benefiting children: with mean income, employment, and
-single-parent share in the same model, poverty share is heavily collinear with
-the other predictors ($r=0.64$ with mean household income, $0.62$ with
-single-parent share), and a conditional coefficient that reverses its bivariate
-sign here is best understood as suppression among correlated regressors. The
-comparison is \textbf{exploratory}: the dense-urban model has only 28
-commuting-zone clusters, below the range where cluster-robust standard errors
-are reliable~\cite{cameron2015practitioner}, so its intervals are likely too
-narrow. It compares shape, not magnitude.
+not be read as poverty benefiting children: poverty share is heavily collinear
+with the other predictors ($r=0.64$ with mean household income, $0.62$ with
+single-parent share), so a coefficient that reverses its bivariate sign here is
+best understood as suppression. The comparison is \textbf{exploratory}: the
+dense-urban model has only 28 commuting-zone clusters, below the range where
+cluster-robust standard errors are reliable~\cite{cameron2015practitioner}.
+It compares shape, not magnitude.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.73\linewidth]{fig3_rural_dense_coefficients.png}
+\includegraphics[width=0.80\linewidth]{fig3_rural_dense_coefficients.png}
 \caption{\textbf{Same-scale rural and dense-urban associations.} Coefficients
 from Equation~\ref{eq:ols} fit separately on rural ($<$100 people per square
 mile, $N=17{,}310$, 727 clusters) and dense-urban ($\geq$10{,}000,
@@ -433,6 +422,7 @@ are exploratory.}
 \end{figure}
 
 %% ====================================================================
+\FloatBarrier
 \section{Discussion}
 %% ====================================================================
 
@@ -452,11 +442,10 @@ tenth to the variance region alone explains.
 Four limitations bound these claims. They are conditional associations, not
 effects: the design cannot separate a neighborhood effect from families sorting
 into neighborhoods, and single-parent share may proxy for family resources that
-travel with children regardless of place. The predictors are strongly collinear
-(mean income with BA share, $r=0.78$), so coefficients trade off against one
-another and the poverty coefficient is a suppression artifact. ``Rural'' is a
-density cutoff of my own choosing, not the Census Bureau's. And the dense-urban
-comparison rests on 28 clusters.
+travel with children. The predictors are strongly collinear (mean income with
+BA share, $r=0.78$), so the poverty coefficient is a suppression artifact.
+``Rural'' is my own density cutoff, not the Census Bureau's. And the
+dense-urban comparison rests on 28 clusters.
 
 The most important finding of this project was the correlation between
 single-parent households and mobility, and I think future work on rural
