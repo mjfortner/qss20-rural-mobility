@@ -32,9 +32,6 @@
 \newcommand{\OUT}{../output}
 \graphicspath{{../output/}{./}}
 
-%% Draft-only marker for text Max still needs to write. Set the second
-%% argument of \newcommand to {} to make these disappear before submitting.
-\newcommand{\towrite}[1]{\medskip\noindent\textcolor{red}{\textbf{[TO WRITE --- #1]}}\medskip}
 
 \title{\vspace{-2em}Which Rural Places Move Kids Up?\\
 \large Neighborhood Correlates of Upward Mobility Within Rural Labor Markets}
@@ -130,22 +127,23 @@ Atlas pushed this to the tract level~\cite{chetty2018atlas}. My analysis sits
 in this strand and extends it in two ways: by restricting attention to rural
 tracts, which are pooled into the national picture in that work, and by
 comparing tracts only within commuting zones. Rural places have been studied
-directly --- Weber et al.~\cite{weber2017rural} find upward mobility highest in
-noncore rural counties, and Connor et al.~\cite{connor2023rural} show that the
-share of children raised in two-parent households accounts for nearly all of
-the rural--urban gap --- but both compare rural places with urban ones. I ask
+directly. Weber et al.~\cite{weber2017rural} find upward mobility highest in
+noncore rural counties, and Connor et al.~\cite{connor2023rural} show that
+the share of children raised in two-parent households accounts for nearly all
+of the rural--urban gap. Both, however, compare rural places with urban ones.
+I ask
 instead what separates rural tracts from \emph{each other} inside the same
 labor market.
 
-\paragraph{Mechanisms: schools, sorting, and race.} Achievement gaps by family
-income have widened across cohorts~\cite{reardon2011}, income segregation has
-risen~\cite{reardonbischoff2011}, school quality tracks measured achievement
-gaps~\cite{hanushek2006}, and mobility differs sharply by race in ways
-neighborhood characteristics alone do not explain~\cite{chetty2020race}. This
-last point shapes how I read my own estimates: the large positive coefficient
-on share white is a conditional association on cross-sectional data, consistent
-with documented national race gaps, and is not interpretable as a place effect
-under this design.
+\paragraph{Mechanisms: schools, sorting, and race.} Two of my predictors are
+already contested in this literature. Third-grade math scores stand in for
+school quality, which tracks measured achievement
+gaps~\cite{reardon2011,hanushek2006} but is itself something families sort
+on~\cite{reardonbischoff2011}. And mobility differs sharply by race in ways
+neighborhood characteristics alone do not explain~\cite{chetty2020race}, so
+the large positive coefficient on share white is a conditional association
+consistent with documented national race gaps, not a place effect under this
+design.
 
 %% ====================================================================
 \section{Data}
@@ -260,11 +258,10 @@ population density, leaving \textbf{71{,}958} tracts. This is an exact-match
 merge on a shared numeric key; no fuzzy matching is involved, and no blocking
 is required.
 
-\paragraph{Derived variables.} Density is binned into five categories (rural
-$<$100; small town 100--500; suburban 500--2k; urban 2k--10k; dense urban
-$\geq$10k people per square mile) with edges defined once in
-\texttt{utils.DENSITY\_BINS}, and the child count
-(\texttt{pooled\_pooled\_count}) is carried through the merge for the screen.
+\paragraph{Derived variables.} The density cutoffs are defined once in
+\texttt{code/utils.py}: rural below 100 and dense urban at or above 10{,}000
+people per square mile. The child count (\texttt{pooled\_pooled\_count}) is
+carried through the merge for the screen.
 
 \paragraph{Estimation.} For the rural sample I estimate
 \begin{equation}
@@ -319,24 +316,12 @@ with'' deliberately.
 \label{sec:results}
 %% ====================================================================
 
-\paragraph{Mobility varies more within density categories than between them.}
-Figure~\ref{fig:density} plots tract mobility across the five density
-categories. Median mobility is modestly higher in rural tracts than dense urban
-ones, but the interquartile range within every category is wider than the gap
-between category medians. Rurality alone is not a useful predictor of a child's
-outcome; the variation worth explaining is \emph{among} rural places.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.66\linewidth]{fig1_mobility_by_density.png}
-\caption{\textbf{Within-category mobility variation exceeds median
-differences.} Distribution of mean adult household income rank for children of
-25th-percentile parents, by 2000 population density category, across 71{,}958
-tracts. Boxes show the interquartile range, whiskers the 5th--95th percentiles,
-and the dashed line the national tract median. The spread inside each category
-is larger than the differences between category medians.}
-\label{fig:density}
-\end{figure}
+Mobility varies more within density categories than between them: median
+rural mobility is modestly higher than dense-urban, but the interquartile
+range within every category is wider than the gaps between category medians.
+Rurality alone is not a useful predictor of a child's outcome, so the
+analysis below compares rural tracts with each other rather than with urban
+ones.
 
 \paragraph{Family structure is the largest adjusted correlate in rural tracts.}
 Figure~\ref{fig:rural} and Table~\ref{tab:ols} report Equation~\ref{eq:ols}
@@ -476,7 +461,7 @@ comparison rests on 28 clusters.
 The most important finding of this project was the correlation between
 single-parent households and mobility, and I think future work on rural
 mobility could be targeted towards finding the causes of this correlation, and
-other traits associated with share of single-parent households.
+other traits associated with the share of single-parent households.
 
 %% ====================================================================
 \begin{thebibliography}{99}
@@ -526,66 +511,22 @@ Social Stratification and Mobility}, 87, 100844.
 \appendix
 %% ====================================================================
 \section{Agentic Analysis}
-%% ====================================================================
-%% This appendix is excluded from the 6-page limit.
-%% Everything below is a scaffold. The episodes are real and are drawn from
-%% the project log, but the transcripts and the judgments have to be yours.
 
-\towrite{this entire appendix --- see the notes file. The structure below is a
-scaffold with the real episodes filled in; you need to paste the transcripts
-and write the accept/reject judgments in your own voice.}
-
-\subsection*{Workflow}
-
-I used an AI coding assistant throughout the analysis and to build the project
-website. The assistant wrote most of the notebook scaffolding and figure code;
-I specified the research design, chose the specification, and reviewed every
-numeric claim against the printed diagnostics.
-
-\subsection*{What I accepted}
-
-\towrite{2--3 concrete examples. Candidates from the log: the commuting-zone
-fixed-effects specification; the dot-and-whisker coefficient plot that replaced
-the standardized mean-difference chart after Milestone 1 feedback; the
-one-to-one merge validation and before/after row-count diagnostics.}
-
-\subsection*{What I rejected or corrected}
-
-A review pass over the Milestone 2 figures surfaced six problems, all of which
-were then fixed:
-
-\begin{enumerate}\itemsep2pt
-\item \textbf{Group-specific standardization inflated the rural--urban
-comparison.} Rural and dense-urban models were each standardized within their
-own sample, making the dense-urban single-parent coefficient look 3.3 times
-larger than the rural one when the underlying ratio is 1.47. Fixed by
-standardizing both on pooled standard deviations.
-\item \textbf{$R^2=0.661$ was misattributed to the covariates.} The
-commuting-zone indicators alone account for 0.564; the covariates add 0.097.
-The paper now reports the incremental value.
-\item \textbf{A takeaway cell was left as a TODO} and would have shipped as
-placeholder text.
-\item \textbf{Inference on 28 clusters} was presented without caveat.
-\item \textbf{Sign flips under the count screen were framed as instability}
-when all three affected coefficients were null in the main model.
-\item \textbf{The positive poverty coefficient traveled without its
-caveat} into figure text, where a reader could take it as evidence that poverty
-benefits children.
-\end{enumerate}
-
-\subsection*{Where the assistant went wrong}
-
-The clearest failure was not a coding error. Asked about missingness, the
-assistant predicted that suppression would fall disproportionately on sparse
-rural tracts and \emph{wrote figure prose asserting that pattern before the
-numbers were computed}. The data show the opposite: outcome suppression runs at
-1.6\% in rural and non-rural tracts alike (Table~\ref{tab:missing}). The
-prediction was plausible, stated confidently, and wrong, and it had already
-been written into a draft of the Milestone 1 memo before it was checked.
-
-\towrite{your own reflection here. What this taught you about where to place
-your own verification, and any other episode you remember where the assistant
-was confidently wrong.}
+For this project I mainly used Claude Code, and occasionally used OpenAI Codex
+to review or challenge the work that Claude had completed. My typical workflow
+was to start by giving the assistant the context in detail, including where my
+mind was, what I had currently completed, and the project specifications. I
+also had my agents keep a markdown file with current progress on the project
+and my general tastes as context for the next session. I found the assistants
+particularly useful for learning new statistics concepts that I could implement
+in my project. When the assistant would implement something, I would check its
+work, use another assistant to challenge it, and ask it to explain things it
+had implemented that were outside of my knowledge. One specific example of
+something I rejected was the slide design for the presentation. My professor
+noted that slide 2 was not providing important information. I agreed, then
+hand-picked a new figure to put on the slide. I also took this feedback into
+account when writing this paper, making sure to not miss the mark and include
+information that is irrelevant.
 
 \subsection*{Transcripts}
 
