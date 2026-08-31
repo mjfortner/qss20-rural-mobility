@@ -47,10 +47,10 @@
 \begin{abstract}
 \noindent Research on neighborhoods and intergenerational mobility is
 overwhelmingly urban, and the Opportunity Atlas notes that rurality helps
-children in some regions and hurts them in others without identifying what
-separates the two. I use Opportunity Atlas tract tables to ask which
-neighborhood characteristics distinguish rural Census tracts with
-above-average upward mobility from otherwise similar rural tracts. Comparing
+children in some regions and hurts them in others without saying what separates
+the two. I ask which neighborhood characteristics distinguish rural Census
+tracts with above-average upward mobility from otherwise similar rural tracts.
+Comparing
 17{,}310 rural tracts to other tracts inside the same commuting zone, the
 share of single-parent households is the largest adjusted correlate of adult
 income rank for children raised at the 25th percentile: a one-standard-deviation
@@ -119,11 +119,11 @@ version of this in the Me Search assignment and Milestone 1.}
 \paragraph{Neighborhood effects on mobility.} Chetty and Hendren estimate that
 neighborhoods affect children's adult outcomes through cumulative childhood
 exposure, using families who move between areas at different child
-ages~\cite{chetty2017exposure,chetty2018county}. The Moving to Opportunity
+ages~\cite{chetty2017exposure,chetty2018county}, and the Moving to Opportunity
 reanalysis reaches the same conclusion experimentally~\cite{chetty2015mto}.
 This work identifies \emph{that} place matters and how much; it says less about
-\emph{which} observable features of a place track opportunity, and it is
-estimated almost entirely on urban movers.
+\emph{which} features of a place track opportunity, and is estimated almost
+entirely on urban movers.
 
 \paragraph{Correlates of mobility across places.} A parallel descriptive
 literature asks what distinguishes high- from low-mobility places. Across
@@ -133,7 +133,13 @@ being the strongest single correlate~\cite{chetty2014land}; the Opportunity
 Atlas pushed this to the tract level~\cite{chetty2018atlas}. My analysis sits
 in this strand and extends it in two ways: by restricting attention to rural
 tracts, which are pooled into the national picture in that work, and by
-comparing tracts only within commuting zones.
+comparing tracts only within commuting zones. Rural places have been studied
+directly --- Weber et al.~\cite{weber2017rural} find upward mobility highest in
+noncore rural counties, and Connor et al.~\cite{connor2023rural} show that the
+share of children raised in two-parent households accounts for nearly all of
+the rural--urban gap --- but both compare rural places with urban ones. I ask
+instead what separates rural tracts from \emph{each other} inside the same
+labor market.
 
 \paragraph{Mechanisms: schools, sorting, and race.} Achievement gaps by family
 income have widened across cohorts~\cite{reardon2011}, income segregation has
@@ -144,11 +150,6 @@ last point shapes how I read my own estimates: the large positive coefficient
 on share white is a conditional association on cross-sectional data, consistent
 with documented national race gaps, and is not interpretable as a place effect
 under this design.
-
-\towrite{one or two sentences positioning your work against a rural-specific
-citation. See the notes file --- this is the one real gap in the related-work
-section and the rubric explicitly asks you not to present your analysis as
-the first on the topic.}
 
 %% ====================================================================
 \section{Data}
@@ -175,10 +176,10 @@ single cohort-pooled statistic, not a panel.
 
 \paragraph{Outcome.} \texttt{kfr\_pooled\_pooled\_p25}: the mean percentile
 rank in the national adult household income distribution for children whose
-parents sat at the 25th percentile, pooling across child race and gender: a
-value of 0.43 means those children reached the 43rd percentile of the adult
-income distribution on average. Because the outcome is a rank, coefficients
-read as percentile points once multiplied by 100.
+parents sat at the 25th percentile, pooling across child race and gender: 0.43
+means those children reached the 43rd percentile on average. Because the
+outcome is a rank, coefficients read as percentile points once multiplied by
+100.
 
 \paragraph{Predictors.} Ten tract characteristics, fixed before estimation to
 span family structure, economic conditions, human capital, social
@@ -303,7 +304,7 @@ changes which rural places the sample describes.
 pattern is distinctive I fit Equation~\ref{eq:ols} separately on rural and on
 dense-urban tracts ($\geq$10{,}000 people per square mile). Coefficients from
 two separately standardized models are not comparable, because one standard
-deviation means something different in each group: the standard deviation of
+deviation means something different in each: the standard deviation of
 single-parent share is 2.2 times larger among dense-urban tracts. For this
 comparison only, both models are standardized on \textbf{pooled}
 rural-plus-dense-urban means and standard deviations, so a unit is the same
@@ -462,7 +463,11 @@ share is the largest adjusted correlate of the adult income rank of children
 raised in low-income families, and local economic conditions are
 indistinguishable from zero. This extends the national cross-commuting-zone
 pattern in~\cite{chetty2014land} into rural America and into a
-within-labor-market comparison, and it survives a precision screen. The second
+within-labor-market comparison, and it survives a precision screen. It is also
+the within-rural counterpart to~\cite{connor2023rural}: they find that
+two-parent household share accounts for the rural advantage \emph{over} urban
+places, and I find that the same characteristic orders rural tracts against one
+another. The second
 result is a caution about magnitude: ten tract characteristics add under a
 tenth to the variance region alone explains.
 
@@ -514,6 +519,13 @@ Quality and the Black--White Achievement Gap}. NBER Working Paper No.~12651.
 \bibitem{cameron2015practitioner} Cameron, A.~C., \& Miller, D.~L. (2015). A
 Practitioner's Guide to Cluster-Robust Inference. \textit{Journal of Human
 Resources}, 50(2), 317--372.
+\bibitem{weber2017rural} Weber, B.~A., Fannin, J.~M., Cordes, S.~M., \&
+Johnson, T.~G. (2017). Upward Mobility of Low-Income Youth in Metropolitan,
+Micropolitan, and Rural America. \textit{The ANNALS of the American Academy of
+Political and Social Science}, 672(1), 103--122.
+\bibitem{connor2023rural} Connor, D., Hunter, L., Jang, J., \& Uhl, J. (2023).
+Family, Community, and the Rural Social Mobility Advantage. \textit{Research in
+Social Stratification and Mobility}, 87, 100844.
 \end{thebibliography}
 
 \clearpage
